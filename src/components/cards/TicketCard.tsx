@@ -1,30 +1,18 @@
 import {
   Box,
-  Button,
-  ButtonGroup,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Container,
+  Divider,
   Flex,
-  FocusLock,
-  Heading,
   IconButton,
   Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
   PopoverTrigger,
   Spacer,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { BiEdit } from "react-icons/bi";
+import { BiEdit, BiPhoneCall } from "react-icons/bi";
+import { MdUpdate } from "react-icons/md";
+import { TbWorld } from "react-icons/tb";
+
 import EditTicketCard from "./EditTicketCard";
 
 interface Props {
@@ -36,13 +24,19 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
 
   return (
     <>
-      <Box borderRadius={"4px"} minW={"99%"} border={"1px"} bg={"white"} mb={4}>
+      <Box
+        borderRadius={"lg"}
+        minW={"99%"}
+        boxShadow={"lg"}
+        bg={"white"}
+        mb={4}
+      >
         <Flex>
           <Box minW={"10%"} bg={"#D5B4B4"} borderRight={"1px"} />
           <Box minW={"90%"} pl={2}>
             <Box>
               <Flex justify="space-between" alignItems="center">
-                <Text as={"b"} fontSize={"lg"} color={"#4D4D4D"}>
+                <Text as={"b"} fontSize={"sm"} color={"#4D4D4D"}>
                   {ticket.title}
                 </Text>
 
@@ -61,15 +55,39 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
               </Flex>
             </Box>
             <Spacer />
-            <Text>{ticket.description}</Text>
+            <Text fontSize={"xs"}>{ticket.description}</Text>
             <Spacer />
-            <Text>{ticket.call_number}</Text>
+            <Divider />
+            <Flex color={"gray"}>
+              <Box pb={2}>
+                <BiPhoneCall />
+              </Box>
+              <Text pt={1} as="sub">
+                {ticket.call_number}
+              </Text>
+            </Flex>
             <Spacer />
-            <Text>{ticket.email}</Text>
+            <Flex color={"gray"}>
+              <Box pb={2}>
+                <TbWorld />
+              </Box>
+              <Text pt={1} as="sub">
+                {ticket.email}
+              </Text>
+            </Flex>
+
             <Spacer />
-            <Text as="sub">{ticket.created_at}</Text>
-            <Spacer />
-            <Text as="sub">{ticket.updated_at}</Text>
+            {/* <Text as="sub">{ticket.created_at}</Text>
+            <Spacer /> */}
+            <Flex color={"gray"}>
+              <Box pb={2}>
+                <MdUpdate />
+              </Box>
+              <Text pt={1} as="sub">
+                {ticket.updated_at}
+              </Text>
+            </Flex>
+
             <Spacer />
           </Box>
         </Flex>
