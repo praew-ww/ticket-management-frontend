@@ -1,21 +1,37 @@
 import {
   Table,
-  TableCaption,
   TableContainer,
   Tag,
   Tbody,
   Td,
-  Tfoot,
   Th,
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface Props {
   ticketData: TicketInfo[];
+  filterStatus: string[];
 }
-const Tables: React.FC<Props> = ({ ticketData }) => {
+const Tables: React.FC<Props> = ({ ticketData, filterStatus }) => {
+  const [newTicket, setNewTicket] = useState<TicketInfo[]>([]);
+  useEffect(() => {
+    setNewTicket([...ticketData]);
+    filterByStatus(filterStatus);
+  }, [ticketData, filterStatus]);
+
+  const filterByStatus = (status: string[]) => {
+    if (status.length > 0) {
+      status = status.map((st) => {
+        return st.toLocaleLowerCase();
+      });
+      const newFilter = ticketData.filter((td) => status.includes(td.status));
+      setNewTicket(newFilter);
+    } else {
+      setNewTicket(ticketData);
+    }
+  };
   return (
     <>
       <TableContainer>
@@ -31,7 +47,7 @@ const Tables: React.FC<Props> = ({ ticketData }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {ticketData.map((td) => (
+            {newTicket.map((td) => (
               <Tr>
                 <Td>{td.id}</Td>
                 <Td>{td.title}</Td>

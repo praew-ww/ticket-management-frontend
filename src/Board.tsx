@@ -16,6 +16,7 @@ import { apiEndpoint } from "./config";
 function Board() {
   const [ticketData, setTicketData] = useState<TicketInfo[]>([]);
   const [sortBy, setSortBy] = useState("");
+  const [filterStatus, setFilterStatus] = useState<string[]>([]);
   useEffect(() => {
     fetch(apiEndpoint.tickets.tickets)
       .then((response) => response.json())
@@ -70,13 +71,13 @@ function Board() {
               <Box mr={"4"}>
                 <FeatureSort sortVal={setSortBy} />
               </Box>
-              <FilterStatus />
+              <FilterStatus filterStatus={setFilterStatus} />
             </Flex>
           </Accordion>
         </Center>
 
         <Divider mt={12} border={"2px"} />
-        <Table ticketData={ticketData} />
+        <Table ticketData={ticketData} filterStatus={filterStatus} />
       </Container>
     </Container>
   );

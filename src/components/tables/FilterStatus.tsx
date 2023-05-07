@@ -8,7 +8,11 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-function FilterStatus() {
+interface Props {
+  filterStatus: (status: string[]) => void;
+}
+
+const FilterStatus: React.FC<Props> = ({ filterStatus }) => {
   const ticketStatus: Status[] = [
     { id: 0, name: "Pending", check: false },
     { id: 1, name: "Accepted", check: false },
@@ -24,8 +28,10 @@ function FilterStatus() {
       ft = ft.filter((f) => f !== filter);
 
       setFilterItem(ft);
+      filterStatus(ft);
     } else {
       setFilterItem([...filterItem, filter]);
+      filterStatus([...filterItem, filter]);
     }
   };
   return (
@@ -59,6 +65,6 @@ function FilterStatus() {
       </AccordionItem>
     </>
   );
-}
+};
 
 export default FilterStatus;
