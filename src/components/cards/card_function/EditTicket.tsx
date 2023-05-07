@@ -12,23 +12,27 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import { apiEndpoint } from "../../../config";
 
-const initialValues = {
-  id: 1,
-  title: "hi",
-  description: "",
-  call: "",
-  email: "",
-};
+interface Props {
+  ticket: TicketInfo;
+}
+
+// const initialValues = {
+//   id: 1,
+//   title: "hi",
+//   description: "",
+//   call: "",
+//   email: "",
+// };
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("title is required"),
   description: Yup.string().required("description is required"),
-  call: Yup.string().required("call is required"),
+  call_number: Yup.string().required("call is required"),
 });
 
-function EditTicket() {
+const EditTicket: React.FC<Props> = ({ ticket }) => {
   const SubmitForm = async (values: any) => {
-    console.log(apiEndpoint.tickets.update, "point");
+    console.log(values, "val");
     await axios.put(apiEndpoint.tickets.update, {
       title: values.title,
       id: values.id,
@@ -42,7 +46,7 @@ function EditTicket() {
     <>
       {" "}
       <Formik
-        initialValues={initialValues}
+        initialValues={ticket}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values);
@@ -76,22 +80,26 @@ function EditTicket() {
                 </FormControl>
               )}
             </Field>
-            <Field name="call">
+            <Field name="call_number">
               {({ field, form }) => (
-                <FormControl isInvalid={form.errors.call && form.touched.call}>
+                <FormControl
+                  isInvalid={
+                    form.errors.call_number && form.touched.call_number
+                  }
+                >
                   <FormLabel>Call</FormLabel>
                   <Input {...field} placeholder="Call" />
                   <FormErrorMessage>{form.errors.call}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
-            <Field name="email">
+            <Field name="website">
               {({ field, form }) => (
                 <FormControl
                   isInvalid={form.errors.email && form.touched.email}
                 >
                   <FormLabel>Email</FormLabel>
-                  <Input {...field} placeholder="Email" />
+                  <Input {...field} placeholder="Website" />
                   <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                 </FormControl>
               )}
@@ -109,6 +117,6 @@ function EditTicket() {
       </Formik>{" "}
     </>
   );
-}
+};
 
 export default EditTicket;

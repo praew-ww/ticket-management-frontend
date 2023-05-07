@@ -25,7 +25,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import EditTicket from "./card_function/EditTicket";
 import UpdateStatus from "./card_function/UpdateStatus";
 
-function EditTicketCard() {
+interface Props {
+  ticket: TicketInfo;
+}
+
+const EditTicketCard: React.FC<Props> = ({ ticket }) => {
   return (
     <div>
       <PopoverContent
@@ -47,10 +51,10 @@ function EditTicketCard() {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <EditTicket />
+                <EditTicket ticket={ticket} />
               </TabPanel>
               <TabPanel>
-                <UpdateStatus />
+                <UpdateStatus ticketID={ticket.id} status={ticket.status} />
               </TabPanel>
             </TabPanels>
           </Tabs>
@@ -65,6 +69,6 @@ function EditTicketCard() {
       </PopoverContent>
     </div>
   );
-}
+};
 
 export default EditTicketCard;

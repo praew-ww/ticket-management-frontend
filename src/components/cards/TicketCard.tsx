@@ -27,7 +27,11 @@ import React from "react";
 import { BiEdit } from "react-icons/bi";
 import EditTicketCard from "./EditTicketCard";
 
-function TicketCard() {
+interface Props {
+  ticket: TicketInfo;
+}
+
+const TicketCard: React.FC<Props> = ({ ticket }) => {
   const initialFocusRef = React.useRef();
 
   return (
@@ -39,11 +43,11 @@ function TicketCard() {
             <Box>
               <Flex justify="space-between" alignItems="center">
                 <Text as={"b"} fontSize={"lg"} color={"#4D4D4D"}>
-                  head
+                  {ticket.title}
                 </Text>
 
                 <Popover placement="bottom" closeOnBlur={false}>
-                  <EditTicketCard />
+                  <EditTicketCard ticket={ticket} />
                   <PopoverTrigger>
                     <IconButton
                       colorScheme="gray"
@@ -56,21 +60,22 @@ function TicketCard() {
                 </Popover>
               </Flex>
             </Box>
-
             <Spacer />
-            <Text>Infomation</Text>
+            <Text>{ticket.description}</Text>
             <Spacer />
-            <Text>contact</Text>
+            <Text>{ticket.call_number}</Text>
             <Spacer />
-            <Text as="sub">created at:</Text>
+            <Text>{ticket.email}</Text>
             <Spacer />
-            <Text as="sub">update at:</Text>
+            <Text as="sub">{ticket.created_at}</Text>
+            <Spacer />
+            <Text as="sub">{ticket.updated_at}</Text>
             <Spacer />
           </Box>
         </Flex>
       </Box>
     </>
   );
-}
+};
 
 export default TicketCard;
