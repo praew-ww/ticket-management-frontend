@@ -15,7 +15,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-function FeatureSort() {
+interface Props {
+  sortVal: (sortValue: string) => void;
+}
+
+const FeatureSort: React.FC<Props> = ({ sortVal }) => {
   const ticketStatus: Status[] = [
     { id: 0, name: "Pending", check: true },
     { id: 1, name: "Accepted", check: true },
@@ -25,7 +29,7 @@ function FeatureSort() {
 
   const [sort, setSort] = useState("");
   const sortBy = (sort: string) => {
-    console.log(sort);
+    sortVal(sort);
   };
   return (
     <>
@@ -79,6 +83,6 @@ function FeatureSort() {
       </AccordionItem>
     </>
   );
-}
+};
 
 export default FeatureSort;
