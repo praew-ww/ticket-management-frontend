@@ -65,7 +65,7 @@ function Board() {
         dropShadow={"2xl"}
       >
         <Center>
-          <Accordion minW={"80%"} allowMultiple>
+          <Accordion minW={"80%"} allowMultiple defaultIndex={[0, 1]}>
             <Flex>
               {" "}
               <Box mr={"4"}>
