@@ -1,12 +1,21 @@
 import {
   Box,
+  Button,
   Divider,
   Flex,
   IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Popover,
   PopoverTrigger,
   Spacer,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
 import { BiEdit, BiPhoneCall } from "react-icons/bi";
@@ -14,13 +23,17 @@ import { MdUpdate } from "react-icons/md";
 import { TbWorld } from "react-icons/tb";
 
 import EditTicketCard from "./EditTicketCard";
+import UpdateStatus from "./card_function/UpdateStatus";
 
 interface Props {
   ticket: TicketInfo;
 }
 
 const TicketCard: React.FC<Props> = ({ ticket }) => {
-  const initialFocusRef = React.useRef();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const finalRef = React.useRef(null);
+  const date = new Date(ticket.updated_at);
+  const newDate = date.toLocaleString("en-US");
 
   return (
     <>
@@ -32,7 +45,21 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
         mb={4}
       >
         <Flex>
-          <Box minW={"10%"} bg={"#D5B4B4"} borderRight={"1px"} />
+          <Box
+            minW={"10%"}
+            style={
+              ticket.status === "pending"
+                ? { backgroundColor: "#8294C4", color: "white" }
+                : ticket.status === "accepted"
+                ? { backgroundColor: "#0EA293", color: "white" }
+                : ticket.status === "rejected"
+                ? { backgroundColor: "#E74646", color: "white" }
+                : ticket.status === "resolved"
+                ? { backgroundColor: "#F7D060", color: "white" }
+                : {}
+            }
+            borderRight={"1px"}
+          />
           <Box minW={"90%"} pl={2}>
             <Box>
               <Flex justify="space-between" alignItems="center">
@@ -44,11 +71,11 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
                   <EditTicketCard ticket={ticket} />
                   <PopoverTrigger>
                     <IconButton
-                      colorScheme="gray"
                       aria-label="Call Segun"
                       size="sm"
                       icon={<BiEdit />}
                       mr={2}
+                      bg={"white"}
                     />
                   </PopoverTrigger>
                 </Popover>
@@ -67,6 +94,7 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
               </Text>
             </Flex>
             <Spacer />
+
             <Flex color={"gray"}>
               <Box pb={2}>
                 <TbWorld />
@@ -84,13 +112,32 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
                 <MdUpdate />
               </Box>
               <Text pt={1} as="sub">
-                {ticket.updated_at}
+                {newDate}
               </Text>
             </Flex>
 
             <Spacer />
           </Box>
         </Flex>
+        <Button minW={"100%"} onClick={onOpen}>
+          Update status
+        </Button>
+        <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Update status</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <UpdateStatus ticket={ticket} />
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Done
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       </Box>
     </>
   );
