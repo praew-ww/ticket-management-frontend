@@ -1,6 +1,4 @@
-// import "./App.css";
 import { Container } from "@chakra-ui/layout";
-import Quotes from "./Quotes";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Navbar from "../public/Navbar";

@@ -54,7 +54,6 @@ const FilterStatus: React.FC<Props> = ({ filterStatus }) => {
               cursor={"pointer"}
               borderRadius={"2xl"}
               color={"white"}
-              // bg={status.check === true ? "#212A3E" : "#9BA4B5"}
               bg={filterItem.includes(status.name) ? "#212A3E" : "#9BA4B5"}
               onClick={() => filterByItem(status.name)}
             >

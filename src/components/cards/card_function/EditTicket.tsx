@@ -35,7 +35,6 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
   const toast = useToast();
 
   const SubmitForm = async (values: any) => {
-    console.log(values, "val");
     if (type == "create") {
       await axios.post(apiEndpoint.tickets.create, {
         title: values.title,
@@ -52,7 +51,6 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
         isClosable: true,
       });
     } else {
-      console.log(values, "val");
       await axios.put(apiEndpoint.tickets.update, {
         title: values.title,
         id: values.id,
@@ -81,7 +79,6 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
         initialValues={ticket}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values, "val");
           setSubmitting(false);
           SubmitForm(values);
         }}

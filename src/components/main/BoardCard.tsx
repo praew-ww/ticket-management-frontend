@@ -1,8 +1,6 @@
 import { Box, Container, Text, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import TicketCard from "../cards/TicketCard";
-import { apiEndpoint } from "../../config";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { fetchTicketList } from "../../slice/ticket";
@@ -21,7 +19,6 @@ const BoardCard: React.FC<Props> = ({ name }) => {
   const getTickets = async () => {
     try {
       dispatch(fetchTicketList());
-      console.log(ticketList);
     } catch (error) {
       toast({
         title: "Cannot find a direction way",

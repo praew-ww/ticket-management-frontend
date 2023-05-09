@@ -17,7 +17,6 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-// import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 const Links = [
   { name: "Home", link: "/" },
@@ -48,7 +47,6 @@ export default function Simple() {
         <Flex h={"10vh"} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
-            // icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
@@ -60,9 +58,6 @@ export default function Simple() {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {/* {Links.map((link) => (
-                <NavLink key={link.name}>{link.name}</NavLink>
-              ))} */}
               <Link
                 px={2}
                 py={1}

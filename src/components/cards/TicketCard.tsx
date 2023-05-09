@@ -8,17 +8,15 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Popover,
   PopoverTrigger,
   Spacer,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { BiEdit, BiPhoneCall } from "react-icons/bi";
+import { BiPhoneCall } from "react-icons/bi";
 import { GrStatusCriticalSmall } from "react-icons/gr";
 
 import { MdUpdate } from "react-icons/md";
@@ -32,7 +30,6 @@ interface Props {
 }
 
 const TicketCard: React.FC<Props> = ({ ticket }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);
   const date = new Date(ticket.updated_at);
   const newDate = date.toLocaleString("en-US");
@@ -79,15 +76,16 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
                       icon={<GrStatusCriticalSmall />}
                       mr={2}
                       borderRadius={"full"}
+                      bg={"white"}
                       style={
                         ticket.status === "pending"
-                          ? { backgroundColor: "#8294C4", color: "white" }
+                          ? { color: "#8294C4" }
                           : ticket.status === "accepted"
-                          ? { backgroundColor: "#0EA293", color: "white" }
+                          ? { color: "#0EA293" }
                           : ticket.status === "rejected"
-                          ? { backgroundColor: "#E74646", color: "white" }
+                          ? { color: "#E74646" }
                           : ticket.status === "resolved"
-                          ? { backgroundColor: "#F7D060", color: "white" }
+                          ? { color: "#F7D060" }
                           : {}
                       }
                     />
@@ -119,8 +117,7 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
             </Flex>
 
             <Spacer />
-            {/* <Text as="sub">{ticket.created_at}</Text>
-            <Spacer /> */}
+
             <Flex color={"gray"}>
               <Box pb={2}>
                 <MdUpdate />

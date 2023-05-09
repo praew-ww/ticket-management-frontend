@@ -22,11 +22,10 @@ const UpdateStatus: React.FC<Props> = ({ ticket }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const updateStatus = async (status: any) => {
-    console.log(status, "new");
     await axios.put(apiEndpoint.tickets.update, {
       status: status,
       id: ticket.id,
-      email: ticket.website,
+      email: ticket.email,
       call_number: ticket.call_number,
       description: ticket.description,
       title: ticket.title,

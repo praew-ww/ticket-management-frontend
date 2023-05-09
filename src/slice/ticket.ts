@@ -1,5 +1,4 @@
 import { createSlice ,createAsyncThunk} from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import { apiEndpoint } from '../config'
 import axios from 'axios'
 

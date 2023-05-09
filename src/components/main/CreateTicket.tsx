@@ -1,12 +1,10 @@
 import { Button } from "@chakra-ui/button";
-import { useDisclosure } from "@chakra-ui/hooks";
 import { Spacer } from "@chakra-ui/layout";
 import {
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
@@ -15,7 +13,6 @@ import { GiPopcorn } from "react-icons/gi";
 import EditTicket from "../cards/card_function/EditTicket";
 
 function CreateTicket() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [ticket, setTicket] = useState<TicketInfo>({
@@ -56,10 +53,6 @@ function CreateTicket() {
               onClose={() => setIsModalOpen(false)}
             />
           </ModalBody>
-
-          <ModalFooter>
-            {/* <Button onClick={() => console.log(onClose, "oc")}>Cancel</Button> */}
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
