@@ -17,13 +17,15 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { BiEdit, BiPhoneCall } from "react-icons/bi";
+import { GrStatusCriticalSmall } from "react-icons/gr";
+
 import { MdUpdate } from "react-icons/md";
 import { TbWorld } from "react-icons/tb";
 
 import EditTicketCard from "./EditTicketCard";
-import UpdateStatus from "./card_function/UpdateStatus";
+import EditTicket from "./card_function/EditTicket";
 
 interface Props {
   ticket: TicketInfo;
@@ -34,6 +36,7 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
   const finalRef = React.useRef(null);
   const date = new Date(ticket.updated_at);
   const newDate = date.toLocaleString("en-US");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -72,10 +75,21 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
                   <PopoverTrigger>
                     <IconButton
                       aria-label="Call Segun"
-                      size="sm"
-                      icon={<BiEdit />}
+                      size="xs"
+                      icon={<GrStatusCriticalSmall />}
                       mr={2}
-                      bg={"white"}
+                      borderRadius={"full"}
+                      style={
+                        ticket.status === "pending"
+                          ? { backgroundColor: "#8294C4", color: "white" }
+                          : ticket.status === "accepted"
+                          ? { backgroundColor: "#0EA293", color: "white" }
+                          : ticket.status === "rejected"
+                          ? { backgroundColor: "#E74646", color: "white" }
+                          : ticket.status === "resolved"
+                          ? { backgroundColor: "#F7D060", color: "white" }
+                          : {}
+                      }
                     />
                   </PopoverTrigger>
                 </Popover>
@@ -119,23 +133,25 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
             <Spacer />
           </Box>
         </Flex>
-        <Button minW={"100%"} onClick={onOpen}>
-          Update status
+        <Button minW={"100%"} onClick={() => setIsModalOpen(true)}>
+          EditTicket
         </Button>
-        <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
+        <Modal
+          finalFocusRef={finalRef}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Update status</ModalHeader>
+            <ModalHeader>Edit Ticket</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <UpdateStatus ticket={ticket} />
+              <EditTicket
+                type={"edit"}
+                ticket={ticket}
+                onClose={() => setIsModalOpen(false)}
+              />
             </ModalBody>
-
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={onClose}>
-                Done
-              </Button>
-            </ModalFooter>
           </ModalContent>
         </Modal>
       </Box>

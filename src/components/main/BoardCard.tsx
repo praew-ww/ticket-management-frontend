@@ -1,21 +1,42 @@
-import { Box, Container, Text } from "@chakra-ui/react";
+import { Box, Container, Text, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import TicketCard from "../cards/TicketCard";
 import { apiEndpoint } from "../../config";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { fetchTicketList } from "../../slice/ticket";
 
 interface Props {
   name: string;
 }
 
 const BoardCard: React.FC<Props> = ({ name }) => {
-  const [ticketData, setTicketData] = useState<TicketInfo[]>([]);
+  const ticketList = useSelector((state: RootState) => state.ticket.ticketList);
+
+  const toast = useToast();
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const getTickets = async () => {
+    try {
+      dispatch(fetchTicketList());
+      console.log(ticketList);
+    } catch (error) {
+      toast({
+        title: "Cannot find a direction way",
+        description: "Cannot find a ticket",
+        status: "error",
+        position: "top-right",
+        isClosable: true,
+      });
+    }
+  };
 
   useEffect(() => {
-    fetch(apiEndpoint.tickets.tickets)
-      .then((response) => response.json())
-      .then((data) => setTicketData(data))
-      .catch((error) => console.error(error));
+    getTickets();
   }, []);
+
   return (
     <>
       <Container
@@ -30,7 +51,7 @@ const BoardCard: React.FC<Props> = ({ name }) => {
             {name}
           </Text>
         </Box>
-        {ticketData.map((td) => {
+        {ticketList.map((td) => {
           if (td.status === name.toLocaleLowerCase()) {
             return <TicketCard ticket={td} />;
           }

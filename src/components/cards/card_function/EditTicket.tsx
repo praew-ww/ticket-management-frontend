@@ -5,51 +5,83 @@ import {
   FormLabel,
   Input,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { Field, Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { apiEndpoint } from "../../../config";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store";
+import { fetchTicketList } from "../../../slice/ticket";
 
 interface Props {
-  ticket: TicketInfo;
+  ticket: TicketInfo | null;
+  type: string;
+  onClose: () => void;
 }
-
-// const initialValues = {
-//   id: 1,
-//   title: "hi",
-//   description: "",
-//   call: "",
-//   email: "",
-// };
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("title is required"),
   description: Yup.string().required("description is required"),
   call_number: Yup.string().required("call is required"),
+  email: Yup.string().required("website is required"),
 });
 
-const EditTicket: React.FC<Props> = ({ ticket }) => {
+const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const toast = useToast();
+
   const SubmitForm = async (values: any) => {
     console.log(values, "val");
-    await axios.put(apiEndpoint.tickets.update, {
-      title: values.title,
-      id: values.id,
-      description: values.description,
-      email: values.website,
-      call_number: values.call_number,
-    });
+    if (type == "create") {
+      await axios.post(apiEndpoint.tickets.create, {
+        title: values.title,
+        description: values.description,
+        email: values.email,
+        call_number: values.call_number,
+        status: "pending",
+      });
+      toast({
+        title: "success!",
+        description: "Ticket created successfully!",
+        status: "success",
+        position: "top-right",
+        isClosable: true,
+      });
+    } else {
+      console.log(values, "val");
+      await axios.put(apiEndpoint.tickets.update, {
+        title: values.title,
+        id: values.id,
+        description: values.description,
+        email: values.email,
+        call_number: values.call_number,
+        status: ticket.status,
+      });
+      toast({
+        title: "success!",
+        description: "Update successful",
+        status: "success",
+        position: "top-right",
+        isClosable: true,
+      });
+    }
+
+    dispatch(fetchTicketList());
+
+    onClose();
   };
 
   return (
     <>
-      {" "}
       <Formik
         initialValues={ticket}
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
+          console.log(values, "val");
           setSubmitting(false);
           SubmitForm(values);
         }}
@@ -93,12 +125,12 @@ const EditTicket: React.FC<Props> = ({ ticket }) => {
                 </FormControl>
               )}
             </Field>
-            <Field name="website">
+            <Field name="email">
               {({ field, form }) => (
                 <FormControl
                   isInvalid={form.errors.email && form.touched.email}
                 >
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Website</FormLabel>
                   <Input {...field} placeholder="Website" />
                   <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                 </FormControl>
@@ -114,7 +146,7 @@ const EditTicket: React.FC<Props> = ({ ticket }) => {
             </Button>
           </Form>
         )}
-      </Formik>{" "}
+      </Formik>
     </>
   );
 };

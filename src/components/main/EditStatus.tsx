@@ -1,7 +1,5 @@
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
-import Axios from "axios";
-import { useEffect, useState } from "react";
 
 import {
   Modal,
@@ -12,25 +10,19 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/modal";
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { RxUpdate } from "react-icons/rx";
 import BoardCard from "./BoardCard";
-import { apiEndpoint } from "../../config";
+
+const TicketStatus: Status[] = [
+  { id: 0, name: "Pending", check: false },
+  { id: 1, name: "Accepted", check: false },
+  { id: 2, name: "Resolved", check: false },
+  { id: 3, name: "Rejected", check: false },
+];
 
 export default function EditStatus() {
-  const ticketStatus: Status[] = [
-    { id: 0, name: "Pending", check: false },
-    { id: 1, name: "Accepted", check: false },
-    { id: 2, name: "Resolved", check: false },
-    { id: 3, name: "Rejected", check: false },
-  ];
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const getTickets = () => {
-    // Axios.get(apiEndpoint.tickets.tickets).then((response) => {
-    //   setTicketData(response.data);
-    // });
-  };
 
   return (
     <>
@@ -57,11 +49,10 @@ export default function EditStatus() {
           <ModalCloseButton />
           <ModalBody>
             <Flex>
-              {ticketStatus.map((ts) => (
+              {TicketStatus.map((ts) => (
                 <BoardCard name={ts.name} />
               ))}
             </Flex>
-            <Button onClick={getTickets}>click</Button>
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose}>Close</Button>
