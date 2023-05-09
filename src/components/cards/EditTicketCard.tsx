@@ -1,28 +1,12 @@
 import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  IconButton,
-  Input,
   PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
   PopoverFooter,
   PopoverHeader,
-  PopoverTrigger,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-  Textarea,
 } from "@chakra-ui/react";
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import EditTicket from "./card_function/EditTicket";
 import UpdateStatus from "./card_function/UpdateStatus";
 
 interface Props {
@@ -32,32 +16,14 @@ interface Props {
 const EditTicketCard: React.FC<Props> = ({ ticket }) => {
   return (
     <div>
-      <PopoverContent
-        color="black"
-        borderColor="blue.800"
-        minW={"500px"}
-        dropShadow={"lg"}
-      >
+      <PopoverContent color="black" minW={"500px"} boxShadow={"lg"}>
         <PopoverHeader pt={4} fontWeight="bold" border="0">
-          Edit Ticket Or Update Status
+          Update Status
         </PopoverHeader>
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverBody>
-          <Tabs variant="enclosed">
-            <TabList>
-              <Tab>Edit Infomation</Tab>
-              <Tab>Update Status</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-                <EditTicket ticket={ticket} />
-              </TabPanel>
-              <TabPanel>
-                <UpdateStatus ticketID={ticket.id} status={ticket.status} />
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+          <UpdateStatus ticket={ticket} />
         </PopoverBody>
         <PopoverFooter
           border="0"
