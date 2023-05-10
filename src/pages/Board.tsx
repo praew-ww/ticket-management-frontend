@@ -7,13 +7,13 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react";
-import Table from "./components/tables/Tables";
-import FeatureSort from "./components/tables/FeatureSort";
-import FilterStatus from "./components/tables/FilterStatus";
-import { useEffect, useState } from "react";
-import { apiEndpoint } from "./config";
+import Table from "../components/tables/Tables";
+import FeatureSort from "../components/tables/FeatureSort";
+import FilterStatus from "../components/tables/FilterStatus";
+import React, { useEffect, useState } from "react";
+import { apiEndpoint } from "../config";
 
-function Board() {
+const Board: React.FC = () => {
   const [ticketData, setTicketData] = useState<TicketInfo[]>([]);
   const [sortBy, setSortBy] = useState("");
   const [filterStatus, setFilterStatus] = useState<string[]>([]);
@@ -81,6 +81,6 @@ function Board() {
       </Container>
     </Container>
   );
-}
+};
 
 export default Board;

@@ -7,7 +7,7 @@ import {
   PopoverHeader,
 } from "@chakra-ui/react";
 import React from "react";
-import UpdateStatus from "./card_function/UpdateStatus";
+import UpdateStatus from "./card_feature/UpdateStatus";
 
 interface Props {
   ticket: TicketInfo;

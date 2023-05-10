@@ -23,7 +23,7 @@ import { MdUpdate } from "react-icons/md";
 import { TbWorld } from "react-icons/tb";
 
 import EditTicketCard from "./EditTicketCard";
-import EditTicket from "./card_function/EditTicket";
+import EditTicket from "./card_feature/EditTicket";
 
 interface Props {
   ticket: TicketInfo;

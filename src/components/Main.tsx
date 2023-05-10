@@ -8,7 +8,7 @@ import { RxUpdate } from "react-icons/rx";
 import CreateTicket from "./main/CreateTicket";
 import EditStatus from "./main/EditStatus";
 
-function Main() {
+const Main: React.FC = () => {
   return (
     <Container mt={10}>
       <Flex>
@@ -17,6 +17,6 @@ function Main() {
       </Flex>
     </Container>
   );
-}
+};
 
 export default Main;

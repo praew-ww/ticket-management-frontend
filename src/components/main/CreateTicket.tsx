@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/modal";
 import React, { useState } from "react";
 import { GiPopcorn } from "react-icons/gi";
-import EditTicket from "../cards/card_function/EditTicket";
+import EditTicket from "../cards/card_feature/EditTicket";
 
-function CreateTicket() {
+const CreateTicket: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [ticket, setTicket] = useState<TicketInfo>({
@@ -58,6 +58,6 @@ function CreateTicket() {
       </Modal>
     </>
   );
-}
+};
 
 export default CreateTicket;

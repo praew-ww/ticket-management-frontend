@@ -1,14 +1,7 @@
-import {
-  Box,
-  Center,
-  Container,
-  Heading,
-  Spacer,
-  Stack,
-} from "@chakra-ui/layout";
+import { Box, Center, Container, Heading, Stack } from "@chakra-ui/layout";
 import React from "react";
 
-function Header() {
+const Header: React.FC = () => {
   return (
     <Container minH={"300px"} pt={14} minW={"75%"}>
       <Stack py={5} ml={4}>
@@ -27,6 +20,6 @@ function Header() {
       </Stack>
     </Container>
   );
-}
+};
 
 export default Header;

@@ -1,7 +1,7 @@
 import { Container } from "@chakra-ui/layout";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Navbar from "../public/Navbar";
+import Header from "../components/Header";
+import Main from "../components/Main";
+import Navbar from "../../public/Navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Board from "./Board";
 
