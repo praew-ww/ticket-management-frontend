@@ -38,13 +38,13 @@ const BoardCard: React.FC<Props> = ({ name }) => {
     <>
       <Container
         minW={"23%"}
-        border={"1px"}
-        bg={"#FDF4F5"}
+        boxShadow={"lg"}
+        bg={"#2A2F4F"}
         mr={2}
         minH={"550px"}
       >
         <Box mb={2}>
-          <Text as={"b"} fontSize={"lg"} color={"#867070"}>
+          <Text as={"b"} fontSize={"lg"} color={"#F7D060"}>
             {name}
           </Text>
         </Box>

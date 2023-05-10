@@ -35,12 +35,13 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
   const toast = useToast();
 
   const SubmitForm = async (values: any) => {
+    console.log("0" + values.call_number);
     if (type == "create") {
       await axios.post(apiEndpoint.tickets.create, {
         title: values.title,
         description: values.description,
         website: values.website,
-        call_number: values.call_number,
+        call_number: "0" + values.call_number,
         status: "pending",
       });
       toast({
@@ -57,7 +58,7 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
         id: values.id,
         description: values.description,
         website: values.website,
-        call_number: values.call_number,
+        call_number: "0" + values.call_number,
         status: ticket.status,
       });
       toast({
@@ -118,7 +119,7 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
                   }
                 >
                   <FormLabel>Call</FormLabel>
-                  <Input {...field} placeholder="Call" />
+                  <Input type="number" {...field} placeholder="Call" />
                   <FormErrorMessage>{form.errors.call}</FormErrorMessage>
                 </FormControl>
               )}

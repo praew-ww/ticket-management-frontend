@@ -10,9 +10,10 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/modal";
-import { Flex } from "@chakra-ui/react";
+import { Box, Container, Flex, Spacer } from "@chakra-ui/react";
 import { RxUpdate } from "react-icons/rx";
 import BoardCard from "./BoardCard";
+import { GrStatusCriticalSmall } from "react-icons/gr";
 
 const TicketStatus: Status[] = [
   { id: 0, name: "Pending", check: false },
@@ -48,6 +49,15 @@ export default function EditStatus() {
           <ModalHeader>Update Ticket</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <Container fontSize={"sm"} minW={"90%"} mb={6}>
+              <Box display={"inline"}>
+                Here, you have the ability to edit a ticket's information by
+                clicking the "Edit Ticket" button on board. Additionally, you
+                can easily update a ticket's status by clicking icon top right
+                on ticket
+              </Box>{" "}
+            </Container>
+
             <Flex>
               {TicketStatus.map((ts) => (
                 <BoardCard name={ts.name} />
