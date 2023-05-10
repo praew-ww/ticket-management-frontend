@@ -53,12 +53,12 @@ const FeatureSort: React.FC<Props> = ({ sortVal }) => {
             borderRadius={"2xl"}
             mb={4}
             onClick={() => {
-              sortBy("Lated"), setSort("Lated");
+              sortBy("Latest"), setSort("Latest");
             }}
             color={"white"}
-            bg={"Lated" === sort ? "#212A3E" : "#9BA4B5"}
+            bg={"Latest" === sort ? "#212A3E" : "#9BA4B5"}
           >
-            Lated Date
+            Latest Date
           </Tag>
           <Divider />
           Status:

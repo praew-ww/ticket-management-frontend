@@ -1,7 +1,8 @@
+const apiURL = import.meta.env.VITE_API_ENDPOINT
 export const apiEndpoint = {
     tickets: {
-      tickets: "http://localhost:3001/ticket", 
-      update: "http://localhost:3001/update",
-      create: "http://localhost:3001/create"
+      tickets: `${apiURL}/ticket`, 
+      update: `${apiURL}/update`,
+      create: `${apiURL}/create`
     }
 }

@@ -33,6 +33,7 @@ function CreateTicket() {
         minH={"20"}
         fontSize={"xl"}
         bg={"#D21312"}
+        _hover={{ bg: "#F15A59" }}
       >
         Create New Ticket
       </Button>

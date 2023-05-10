@@ -64,7 +64,7 @@ export default function Simple() {
                 rounded={"md"}
                 _hover={{
                   textDecoration: "none",
-                  bg: useColorModeValue("gray.200", "gray.700"),
+                  color: "#F7D060",
                 }}
                 href={"/"}
               >
@@ -76,7 +76,7 @@ export default function Simple() {
                 rounded={"md"}
                 _hover={{
                   textDecoration: "none",
-                  bg: useColorModeValue("gray.200", "gray.700"),
+                  color: "#F7D060",
                 }}
                 href={"/board"}
               >

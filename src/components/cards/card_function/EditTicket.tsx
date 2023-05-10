@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
   title: Yup.string().required("title is required"),
   description: Yup.string().required("description is required"),
   call_number: Yup.string().required("call is required"),
-  email: Yup.string().required("website is required"),
+  website: Yup.string().required("website is required"),
 });
 
 const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
@@ -39,7 +39,7 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
       await axios.post(apiEndpoint.tickets.create, {
         title: values.title,
         description: values.description,
-        email: values.email,
+        website: values.website,
         call_number: values.call_number,
         status: "pending",
       });
@@ -51,11 +51,12 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
         isClosable: true,
       });
     } else {
+      console.log(values);
       await axios.put(apiEndpoint.tickets.update, {
         title: values.title,
         id: values.id,
         description: values.description,
-        email: values.email,
+        website: values.website,
         call_number: values.call_number,
         status: ticket.status,
       });
@@ -122,14 +123,14 @@ const EditTicket: React.FC<Props> = ({ ticket, type, onClose }) => {
                 </FormControl>
               )}
             </Field>
-            <Field name="email">
+            <Field name="website">
               {({ field, form }) => (
                 <FormControl
-                  isInvalid={form.errors.email && form.touched.email}
+                  isInvalid={form.errors.website && form.touched.website}
                 >
                   <FormLabel>Website</FormLabel>
                   <Input {...field} placeholder="Website" />
-                  <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                  <FormErrorMessage>{form.errors.website}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>

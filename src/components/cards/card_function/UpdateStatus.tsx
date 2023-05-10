@@ -25,7 +25,7 @@ const UpdateStatus: React.FC<Props> = ({ ticket }) => {
     await axios.put(apiEndpoint.tickets.update, {
       status: status,
       id: ticket.id,
-      email: ticket.email,
+      website: ticket.website,
       call_number: ticket.call_number,
       description: ticket.description,
       title: ticket.title,

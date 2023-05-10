@@ -112,7 +112,7 @@ const TicketCard: React.FC<Props> = ({ ticket }) => {
                 <TbWorld />
               </Box>
               <Text pt={1} as="sub">
-                {ticket.email}
+                {ticket.website}
               </Text>
             </Flex>
 

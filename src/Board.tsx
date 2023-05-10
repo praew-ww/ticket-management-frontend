@@ -31,7 +31,7 @@ function Board() {
   const sortFeature = (sort: string) => {
     const newSortData = [...ticketData];
 
-    if (sort === "Lated") {
+    if (sort === "Latest") {
       newSortData.sort((a, b) => {
         const dateA = new Date(a.updated_at).getTime();
         const dateB = new Date(b.updated_at).getTime();

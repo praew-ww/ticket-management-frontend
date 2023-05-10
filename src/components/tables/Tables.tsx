@@ -44,7 +44,7 @@ const Tables: React.FC<Props> = ({ ticketData, filterStatus }) => {
 
               <Th>Ticket name</Th>
               <Th>Infomation</Th>
-              <Th>lated Updated</Th>
+              <Th>latest Updated</Th>
               <Th isNumeric> Status</Th>
             </Tr>
           </Thead>
